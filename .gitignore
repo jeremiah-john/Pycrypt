@@ -1,0 +1,9 @@
+#documents being edited at the moment
+*.py~
+*.txt~
+*.md~
+*.gitignore~
+
+#text files produced as result of program
+*.txt
+
