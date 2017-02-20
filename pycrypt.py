@@ -8,7 +8,9 @@ def encrypt():
         sliced = list(messageIn);
 
         for i in sliced:
-            print 1;
+            newKeyEntry = random.randint(1,110);
+            key.append(newKeyEntry);
+            print key;
 
         return
     
