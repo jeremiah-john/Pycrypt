@@ -7,11 +7,11 @@ def encrypt():
         messageIn = raw_input("what is it that you want to encrypt?:");
         sliced = list(messageIn);
 
-        for i in sliced:
+        for letter in sliced:
             newKeyEntry = random.randint(1,110);
             key.append(newKeyEntry);
-            print key;
-
+            print chr(sliced[letter]);
+           
         return
-    
+
 encrypt();
