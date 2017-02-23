@@ -36,9 +36,9 @@ def encrypt():
                 crypted.append(newChar);
 
 
-        crypted = str(crypted);
-        print crypted;
 
+        crypted = ''.join(crypted);
+        print crypted;
         return
 
 encrypt();
