@@ -9,9 +9,9 @@ def encrypt():
         a = 0;  # variable is set so we can go through each letter and assign it a key in for loop
         manipulate = []; # We keep the numbers we get from ord() here
 
-        prechr = []
-        crypted = []
-
+        prechr = [];
+        crypted = [];
+        newMsg = open("out.txt","wb+");
         for letter in sliced:
             newKeyEntry = random.randint(1,110);
             key.append(newKeyEntry);
@@ -32,13 +32,13 @@ def encrypt():
         a = 0
 
         for number in prechr:  #now we convert each new number into an ASCII character
-                newChar = unichr(prechr[a]);
+                newChar = chr(prechr[a]);
                 crypted.append(newChar);
 
 
 
         crypted = ''.join(crypted);
-        print crypted;
+        newMsg.write(crypted);
         return
 
 encrypt();
