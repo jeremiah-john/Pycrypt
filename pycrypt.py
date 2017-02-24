@@ -34,6 +34,7 @@ def encrypt():
         for number in prechr:  #now we convert each new number into an ASCII character
                 newChar = chr(prechr[a]);
                 crypted.append(newChar);
+                a = a + 1;
 
 
 
