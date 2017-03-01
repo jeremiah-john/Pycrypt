@@ -4,6 +4,6 @@
 *.md~
 *.gitignore~
 
-#text files produced as result of program
+#files produced as result of program
 *.txt
-
+*.p
