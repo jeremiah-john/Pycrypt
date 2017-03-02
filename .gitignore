@@ -3,7 +3,11 @@
 *.txt~
 *.md~
 *.gitignore~
+<<<<<<< HEAD
 
+=======
+*.py#
+>>>>>>> testing
 #files produced as result of program
 *.txt
 *.p

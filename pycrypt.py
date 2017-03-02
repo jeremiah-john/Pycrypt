@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import base64
+import cPickle as pickle
 import random
 
 def encrypt():
@@ -40,6 +42,22 @@ def encrypt():
 
         crypted = ''.join(crypted);
         newMsg.write(crypted);
+<<<<<<< HEAD
+=======
+        passwd = raw_input("Please set a password for your key file:");
+        passCheck = raw_input("enter password again:");
+        while passwd != passCheck:
+                print ("two passwords entered do not match!");
+                passwd = raw_input("Please set a password for your key file:");
+                passCheck = raw_input("enter password again:");
+
+        passwd = passwd;
+        key = str(key);
+        keyFile = open("keyfile.txt", "wb+");
+        keyFile.write(key);
+        keyFile.close();
+        newMsg.close();
+>>>>>>> testing
         return
 
 encrypt();
