@@ -42,8 +42,6 @@ def encrypt():
 
         crypted = ''.join(crypted);
         newMsg.write(crypted);
-<<<<<<< HEAD
-=======
         passwd = raw_input("Please set a password for your key file:");
         passCheck = raw_input("enter password again:");
         while passwd != passCheck:
@@ -53,11 +51,12 @@ def encrypt():
 
         passwd = passwd;
         key = str(key);
-        keyFile = open("keyfile.txt", "wb+");
-        keyFile.write(key);
-        keyFile.close();
+        pickle.dump(key, open("key.p", "wb+"));
+        encPass = base64.b64encode(passwd);
+        passFile = open("passFile.txt", "wb+");
+        passFile.write(encPass);
         newMsg.close();
->>>>>>> testing
+        passFile.close();
         return
 
 encrypt();
