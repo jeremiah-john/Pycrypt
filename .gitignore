@@ -3,8 +3,14 @@
 *.txt~
 *.md~
 *.gitignore~
-
 #files produced as result of program
 *.txt
 *.p
 
+=======
+=======
+*.py#
+
+#files produced as result of program
+*.txt
+*.p
