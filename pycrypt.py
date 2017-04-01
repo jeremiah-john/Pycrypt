@@ -33,8 +33,8 @@ def encrypt():
 
 
         passwd = passwd;
-        pickle.dump(key, open("key.p", "wb+"));
-        encPass = base64.b64encode(passwd);
+        pickle.dump(key, open("key.p", "wb+")); # where we will store the key. This is a very insecure way to store keys and needs to change
+        encPass = base64.b64encode(passwd); # base 64 is not very secure if you want your data to be safe. will be moving to SHA soon
         passFile = open("passFile.txt", "wb+");
         passFile.write(encPass);
         newMsg.close();
@@ -45,7 +45,7 @@ def decrypt():
         message = open("out.txt", "rb");
         human = open("message.txt", "wb+");
         setPass = open("passFile.txt", "rb");
-        passStat = os.stat('passFile.txt');
+        passStat = os.stat('passFile.txt'); # we need to find out the size of the password file so that we can efficiently print the encoded password to a variable to decode
         passSize = passStat.st_size;
         passLine = setPass.readline(passSize);
         passWord = base64.b64decode(passLine);
@@ -58,31 +58,22 @@ def decrypt():
         key = pickle.load( open("key.p", "rb"));
 
         messStat = os.stat('out.txt');
-        messSize = messStat.st_size;
-        fullMess = message.readline(messSize);
-        manipulateEnc = list(fullMess);
+        messSize = messStat.st_size; # finds out size of message file
+        fullMess = message.readline(messSize); # reads full message file (since the password lenght is up to user input, its better to have the program read up to the size of the file
+        manipulateEnc = list(fullMess); # we can now iterate throught the encrypted string letter by letter
 
         i = 0;
         bigNums = [];
+	readable = [];
         for letter in manipulateEnc:
                 noombar = ord(manipulateEnc[i]);
-                bigNums.append(noombar);
+		together = noombar - key[i]; # we shift the letter back to its unencrypted form and then we print it out
+                if together < 0:
+			together = together + 255;
+		origText = chr(together);
+		readable.append(origText);
                 i = i + 1;
 
-        i = 0;
-        numsPreChr = [];
-        for data in bigNums:
-                together = bigNums[i] - key[i];
-                if together < 0:
-                        together = together + 225;
-                numsPreChr.append(together);
-                i = i + 1;
-        i = 0;
-        readable = [];
-        for num in numsPreChr:
-                origText = chr(numsPreChr[i]);
-                readable.append(origText);
-                i = i + 1;
 
         unencrypted = ''.join(readable);
         human.write(unencrypted);
