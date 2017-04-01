@@ -10,26 +10,24 @@ def encrypt():
         messageIn = raw_input("what is it that you want to encrypt?:");
         sliced = list(messageIn); #We now can manipulate the string by letter. we need this for encryption with random integers
         a = 0;  # variable is set so we can go through each letter and assign it a key in for loop
-        manipulate = []; # We keep the numbers we get from ord() here
 
-        prechr = [];
-        crypted = [];
-        newMsg = open("out.txt","wb+");
+        crypted = []; # where we will store the encrypted message so we can write to a text file
+        newMsg = open("out.txt","wb+"); # the text file to write the encrypted message
         for letter in sliced:
-            newKeyEntry = random.randint(1,110);
-            key.append(newKeyEntry);
-            newData = ord(sliced[a]);
-            newNum = newData + key[a];
-	    newLetter = chr(newNum);
+            newKeyEntry = random.randint(1,110); # a random number to shift each letter in the string
+            key.append(newKeyEntry); # appending each random key number to use for decryption later
+            newData = ord(sliced[a]); # returns an ASCII value for a character
+            newNum = newData + key[a]; # we shift the letter by a random key number
+	    newLetter = chr(newNum); # we get the new character from the sum of the key number and the unencrypted letter's ASCII value
             crypted.append(newLetter); # we can do both ord() and chr() in one for loop, reducing the lines of code needed
 	    a = a + 1;
 
-        crypted = ''.join(crypted);
-        newMsg.write(crypted);
+        crypted = ''.join(crypted); # making sure there are no extra spaces in the final output
+        newMsg.write(crypted); # we write the encrypted string to a text file
         passwd = raw_input("Please set a password for your key file:");
-        passCheck = raw_input("enter password again:");
-        while passwd != passCheck:
-                print ("two passwords entered do not match!");
+        passCheck = raw_input("enter password again:"); # simple password prompting (I kept running into a problem with getPass, so I just used raw_input)
+        while passwd != passCheck: # asks for the password again if the two entries asking for the password do not match
+                print ("two passwords entered do not match!"); 
                 passwd = raw_input("Please set a password for your key file:");
                 passCheck = raw_input("enter password again:");
 
