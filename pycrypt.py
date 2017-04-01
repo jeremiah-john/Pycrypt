@@ -19,27 +19,10 @@ def encrypt():
             newKeyEntry = random.randint(1,110);
             key.append(newKeyEntry);
             newData = ord(sliced[a]);
-            manipulate.append(newData);
-            a = a + 1;
-        
-        a = 0
-        
-        for data in manipulate :
-            newNum = manipulate[a] + key[a]; # we add the numbers so we can convert them back using chr()
-            if newNum > 255:
-                while newNum > 255:
-                        newNum = newNum - 255;
-            prechr.append(newNum);
-            a = a + 1;
-
-        a = 0
-
-        for number in prechr:  #now we convert each new number into an ASCII character
-                newChar = chr(prechr[a]);
-                crypted.append(newChar);
-                a = a + 1;
-
-
+            newNum = newData + key[a];
+	    newLetter = chr(newNum);
+            crypted.append(newLetter); # we can do both ord() and chr() in one for loop, reducing the lines of code needed
+	    a = a + 1;
 
         crypted = ''.join(crypted);
         newMsg.write(crypted);
