@@ -48,11 +48,10 @@ def decrypt():
         passStat = os.stat('passFile.txt'); # we need to find out the size of the password file so that we can efficiently print the encoded password to a variable to decode
         passSize = passStat.st_size;
         passLine = setPass.readline(passSize);
-        passWord = base64.b64decode(passLine);
         
         passCheck = raw_input("please enter your password to decrypt the file:");
-
-        while passCheck != passWord:
+	passHash = hashlib.sha256(passCheck).hexdigest();
+        while passHash != passLine:
                 print ("Password Incorrect!");
                 passCheck = raw_input("please enter your password to decrypt the file");
         key = pickle.load( open("key.p", "rb"));
