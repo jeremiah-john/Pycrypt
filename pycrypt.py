@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os
-import base64
+import hashlib
 import cPickle as pickle
 import random
 
@@ -34,7 +34,7 @@ def encrypt():
 
         passwd = passwd;
         pickle.dump(key, open("key.p", "wb+")); # where we will store the key. This is a very insecure way to store keys and needs to change
-        encPass = base64.b64encode(passwd); # base 64 is not very secure if you want your data to be safe. will be moving to SHA soon
+        encPass = hashlib.sha256(passwd).hexdigest(); #  moved to SHA256 
         passFile = open("passFile.txt", "wb+");
         passFile.write(encPass);
         newMsg.close();
