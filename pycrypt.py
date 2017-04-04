@@ -12,7 +12,9 @@ def encrypt():
         a = 0;  # variable is set so we can go through each letter and assign it a key in for loop
 
         crypted = []; # where we will store the encrypted message so we can write to a text file
-        newMsg = open("out.txt","wb+"); # the text file to write the encrypted message
+        
+	outputFile = raw_input("what is the name of the file you want to write the encrypted message to?(file extensions also compatible(.txt,.torrent,etc)):"); #now the user can specify the name of the file to write the encrypted message to
+	newMsg = open(outputFile,"wb+"); # the text file to write the encrypted message
         for letter in sliced:
             newKeyEntry = random.randint(1,110); # a random number to shift each letter in the string
             key.append(newKeyEntry); # appending each random key number to use for decryption later
@@ -21,7 +23,8 @@ def encrypt():
 	    newLetter = chr(newNum); # we get the new character from the sum of the key number and the unencrypted letter's ASCII value
             crypted.append(newLetter); # we can do both ord() and chr() in one for loop, reducing the lines of code needed
 	    a = a + 1;
-
+	
+	
         crypted = ''.join(crypted); # making sure there are no extra spaces in the final output
         newMsg.write(crypted); # we write the encrypted string to a text file
         passwd = raw_input("Please set a password for your key file:");
@@ -31,7 +34,7 @@ def encrypt():
                 passwd = raw_input("Please set a password for your key file:");
                 passCheck = raw_input("enter password again:");
 
-
+	
         passwd = passwd;
         pickle.dump(key, open("key.p", "wb+")); # where we will store the key. This is a very insecure way to store keys and needs to change
         encPass = hashlib.sha256(passwd).hexdigest(); #  moved to SHA256 
@@ -42,7 +45,8 @@ def encrypt():
         return;
 
 def decrypt():
-        message = open("out.txt", "rb");
+	inputFile = raw_input("what is the name of the file you want to decrypt? Include filename extension:");
+        message = open(inputFile, "rb");
         human = open("message.txt", "wb+");
         setPass = open("passFile.txt", "rb");
         passStat = os.stat('passFile.txt'); # we need to find out the size of the password file so that we can efficiently print the encoded password to a variable to decode
@@ -56,7 +60,7 @@ def decrypt():
                 passCheck = raw_input("please enter your password to decrypt the file");
         key = pickle.load( open("key.p", "rb"));
 
-        messStat = os.stat('out.txt');
+        messStat = os.stat(inputFile);
         messSize = messStat.st_size; # finds out size of message file
         fullMess = message.readline(messSize); # reads full message file (since the password lenght is up to user input, its better to have the program read up to the size of the file
         manipulateEnc = list(fullMess); # we can now iterate throught the encrypted string letter by letter
