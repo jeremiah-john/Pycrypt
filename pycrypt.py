@@ -47,7 +47,6 @@ def encrypt():
 def decrypt():
 	inputFile = raw_input("what is the name of the file you want to decrypt? Include filename extension:");
         message = open(inputFile, "rb");
-        human = open("message.txt", "wb+");
         setPass = open("passFile.txt", "rb");
         passStat = os.stat('passFile.txt'); # we need to find out the size of the password file so that we can efficiently print the encoded password to a variable to decode
         passSize = passStat.st_size;
@@ -77,7 +76,8 @@ def decrypt():
 		readable.append(origText);
                 i = i + 1;
 
-
+	cleanOutput = raw_input("what is the name of the file you want to write the decrypted message to? include file extension:");
+	human = open(cleanOutput, "wb+");
         unencrypted = ''.join(readable);
         human.write(unencrypted);
         message.close();
